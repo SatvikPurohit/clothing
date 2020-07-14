@@ -1,11 +1,17 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import "./categories.styles.scss";
 
-const Category = ({ title, imageUrl, size }) => {
+let Category = ({ title, imageUrl, size, linkUrl, history, match }) => {
   let class_name = "category";
   if (size) class_name = `${class_name} ${class_name}--${size}`;
+
+  const navigateTo = () => {
+    if (linkUrl) history.push(`${match.url}${linkUrl}`);
+  };
+
   return (
-    <div className={class_name}>
+    <div className={class_name} onClick={navigateTo}>
       {/* to scale image don't add it to container */}
       <div
         className="category__image"
@@ -18,6 +24,8 @@ const Category = ({ title, imageUrl, size }) => {
     </div>
   );
 };
+
+Category = withRouter(Category);
 
 class Categories extends React.Component {
   state = {
