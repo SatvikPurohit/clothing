@@ -1,68 +1,11 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import Category from "../category/category.component";
+import CATEGORIES from "../../data/categories";
 import "./categories.styles.scss";
-
-let Category = ({ title, imageUrl, size, linkUrl, history, match }) => {
-  let class_name = "category";
-  if (size) class_name = `${class_name} ${class_name}--${size}`;
-
-  const navigateTo = () => {
-    if (linkUrl) history.push(`${match.url}${linkUrl}`);
-  };
-
-  return (
-    <div className={class_name} onClick={navigateTo}>
-      {/* to scale image don't add it to container */}
-      <div
-        className="category__image"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      />
-      <div className="category__content">
-        <h1 className="category__title">{title.toUpperCase()}</h1>
-        <span className="category__subtitle">Shop Now</span>
-      </div>
-    </div>
-  );
-};
-
-Category = withRouter(Category);
 
 class Categories extends React.Component {
   state = {
-    sections: [
-      {
-        title: "hats",
-        imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-        id: 1,
-        linkUrl: "hats",
-      },
-      {
-        title: "jackets",
-        imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-        id: 2,
-        linkUrl: "",
-      },
-      {
-        title: "sneakers",
-        imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-        id: 3,
-        linkUrl: "",
-      },
-      {
-        title: "womens",
-        imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-        size: "large",
-        id: 4,
-        linkUrl: "",
-      },
-      {
-        title: "mens",
-        imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-        size: "large",
-        id: 5,
-        linkUrl: "",
-      },
-    ],
+    sections: CATEGORIES,
   };
 
   render() {

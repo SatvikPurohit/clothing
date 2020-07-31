@@ -1,0 +1,38 @@
+/* repeating flex item */
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 22%;
+  height: 35rem;
+
+  &__image {
+    width: 100%;
+    height: 95%;
+    /* 
+    cover:
+    Scales the image as large as possible without stretching the 
+    image. If the proportions of the image differ from the "element",
+    it is cropped either vertically or horizontally so that no empty 
+    space remains. 
+    */
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 0.5rem;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.8rem;
+  }
+
+  &__name {
+    width: 85%;
+  }
+
+  &__price {
+    width: 15%;
+  }
+}
