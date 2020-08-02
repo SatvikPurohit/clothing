@@ -1,0 +1,26 @@
+@import "../../App.styles.scss";
+
+.register-form {
+  width: 50%;
+  padding: $padding-3;
+  &__title {
+    font-size: $h2-font-size;
+  }
+  &__subtitle {
+    display: inline-block;
+    font-size: $font-size;
+    margin-bottom: $margin-bottom-3;
+  }
+
+  &__submit {
+    border: 2px solid rgb(39, 38, 38);
+    background-color: #000;
+    font-size: $font-size;
+    padding: 1rem 2rem;
+    color: #fff;
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+}

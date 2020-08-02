@@ -1,3 +1,5 @@
+@import "../../App.styles.scss";
+
 /* repeating flex item*/
 .category {
   display: flex;
@@ -53,12 +55,12 @@
   &__title {
     font-weight: bold;
     margin-bottom: 0.6rem;
-    font-size: 2.2rem;
+    font-size: $h1-font-size;
     color: #4a4a4a;
   }
 
   &__subtitle {
     font-weight: lighter;
-    font-size: 1.6rem;
+    font-size: $font-size;
   }
 }

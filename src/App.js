@@ -1,12 +1,16 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import Header from "./components/header/header.component.jsx";
 import HomePage from "./pages/homepage/homepage.component";
 import Products from "./pages/products/products.component.jsx";
+import SignIn from "./pages/signin/signin.component.jsx";
 import "./App.styles.scss";
 
 const App = () => {
   return (
     <>
+      <Header />
+
       {/*
          without switch, if not "exact" : /something will 
                                        return /'s component along with it's own
@@ -26,6 +30,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/products" component={Products} />
+        <Route path="/signin" component={SignIn} />
       </Switch>
     </>
   );

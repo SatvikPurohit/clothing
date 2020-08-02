@@ -1,0 +1,25 @@
+@import "../../App.styles.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 7rem;
+  margin-bottom: $margin-bottom-3;
+
+  &__log {
+    height: 100%;
+    width: 7rem;
+    padding: 2.5rem;
+  }
+
+  &__navigation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 50%;
+    &-link {
+      padding: 1rem 1.5rem;
+      font-size: $font-size;
+    }
+  }
+}

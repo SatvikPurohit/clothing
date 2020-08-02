@@ -16,3 +16,32 @@ body {
   padding: 2rem 7rem;
   font-family: "Open Sans Condensed", sans-serif;
 }
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+/* *****constants***** */
+
+/* margins  */
+$margin-bottom-3: 3rem;
+
+/* padding */
+$padding-3: 3rem;
+
+/* Typo */
+$font-size: 1.6rem;
+$h1-font-size: 2.8rem;
+$h2-font-size: 2rem;
+
+/* Color */
+$sub-color: grey;
+$main-color: black;
+
+/* Mixin's */
+@mixin shrinkLabel {
+  top: -1.4rem;
+  font-size: 1.2rem;
+  color: $main-color;
+}
