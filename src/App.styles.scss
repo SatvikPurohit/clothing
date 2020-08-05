@@ -3,7 +3,7 @@
 *::before {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 /*  1rem = 10px --> 10px/16px(browser default) */
@@ -12,7 +12,6 @@ html {
 }
 
 body {
-  box-sizing: border-box;
   padding: 2rem 7rem;
   font-family: "Open Sans Condensed", sans-serif;
 }

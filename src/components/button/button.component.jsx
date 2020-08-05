@@ -23,7 +23,7 @@ const Button = ({
   className,
   htmlType,
   children,
-  onclick,
+  onClick,
   value,
   ...other
 }) => {
@@ -41,7 +41,7 @@ const Button = ({
       break;
   }
   /* classNames */
-  let classes = "";
+  let classes = "button";
   if (className) classes = `${className} ${classes}`;
   if (type) classes = `${classes} ${type}`;
   if (shape) classes = `${classes} ${shape}`;
@@ -62,7 +62,11 @@ const Button = ({
       button = <input type="submit" value={value} className={classes} />;
       break;
     case "button":
-      button = <button onClick={onclick}>{children}</button>;
+      button = (
+        <button onClick={onClick} className={classes}>
+          {children}
+        </button>
+      );
       break;
     default:
       break;

@@ -4,14 +4,44 @@ import Header from "./components/header/header.component.jsx";
 import HomePage from "./pages/homepage/homepage.component";
 import Products from "./pages/products/products.component.jsx";
 import SignIn from "./pages/signin/signin.component.jsx";
+import { auth } from "./firebase/firebase.utils";
 import "./App.styles.scss";
 
-const App = () => {
-  return (
-    <>
-      <Header />
+class App extends React.Component {
+  unsubscribeAuth = null;
+  constructor() {
+    super();
+    this.state = { currentUser: {} };
+  }
+  componentDidMount() {
+    /* 
+     auth.onAuthStateChanged: once after login,
+     then always executes till app logout
+     */
+    this.unsubscribeAuth = auth.onAuthStateChanged((user) => {
+      if (user) {
+        const { refreshToken, photoURL, email, displayName, ...restObj } = user;
+        this.setState({
+          currentUser: {
+            refreshToken,
+            photoURL,
+            email,
+            displayName,
+          },
+        });
+      }
+    });
+  }
 
-      {/*
+  componentWillUnmount() {
+    this.unsubscribeAuth();
+  }
+
+  render() {
+    return (
+      <>
+        <Header currentUser={this.state.currentUser} />
+        {/*
          without switch, if not "exact" : /something will 
                                        return /'s component along with it's own
                                        handled through "match param"
@@ -27,13 +57,14 @@ const App = () => {
                                    because router props are only for 
                                    components passed to component= 
       */}
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/products" component={Products} />
-        <Route path="/signin" component={SignIn} />
-      </Switch>
-    </>
-  );
-};
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/products" component={Products} />
+          <Route path="/signin" component={SignIn} />
+        </Switch>
+      </>
+    );
+  }
+}
 
 export default App;

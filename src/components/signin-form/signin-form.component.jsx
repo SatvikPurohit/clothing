@@ -1,6 +1,7 @@
 import React from "react";
 import FormInput from "../../components/form-input/form-input.component";
 import Button from "../../components/button/button.component";
+import { signInWithGoogle } from "../../firebase/firebase.utils";
 import "./signin-form.styles.scss";
 
 const SignInForm = ({ onSubmit, onChange, fieldValues }) => {
@@ -20,7 +21,6 @@ const SignInForm = ({ onSubmit, onChange, fieldValues }) => {
           value={email}
           onChange={onChange}
           label="Email"
-          required
         />
         <FormInput
           htmlName="password"
@@ -29,13 +29,13 @@ const SignInForm = ({ onSubmit, onChange, fieldValues }) => {
           value={password}
           onChange={onChange}
           label="Password"
-          required
         />
-        <Button
-          htmlType="submit"
-          value="Sign In"
-          className="signin-form__submit"
-        />
+        <div className="signin-form__button-group">
+          <Button htmlType="submit" value="Sign In" />
+          <Button htmlType="button" type="primary" onClick={signInWithGoogle}>
+            Sign In With Google
+          </Button>
+        </div>
       </form>
     </div>
   );
