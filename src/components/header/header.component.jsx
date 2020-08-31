@@ -8,7 +8,6 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./header.styles.scss";
 
 let Header = ({ currentUser }) => {
-  const { email } = currentUser;
   const signOut = () => auth.signOut();
 
   return (
@@ -27,7 +26,7 @@ let Header = ({ currentUser }) => {
           to="/signin"
           onClick={signOut}
         >
-          {email ? `Sign out` : `Sign in`}
+          {currentUser ? `Sign out` : `Sign in`}
         </Link>
       </div>
     </div>

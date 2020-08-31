@@ -15,14 +15,46 @@ var firebaseConfig = {
 /* initialize with project config */
 firebase.initializeApp(firebaseConfig);
 
-/* auth and store for same app config*/
-export const auth = firebase.auth();
+/* DB */
 export const firestore = firebase.firestore();
 
-/* Show sign-in provider */
+/* 
+   auth and store for same app config
+   Show sign-in provider 
+   register kind of sign-in method 
+
+
+   on sign-in create copy of firebase auth into firebase store for our app
+   also, this can be used with sign up
+ */
+export const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
-/* register kind of sign-in method */
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const currentUserProfileDocument = async (userAuth, additionalInfo) => {
+  if (!userAuth) return;
+  // check if it already exists
+  //  set ref to users doc
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+  const snapshot = await userRef.get();
+  if (!snapshot.exists) {
+    const { email, refreshToken, photoURL, displayName, uid } = userAuth;
+    const createdAt = new Date();
+    try {
+      await userRef.set({
+        refreshToken,
+        photoURL,
+        email,
+        displayName,
+        uid,
+        createdAt,
+        ...additionalInfo,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  return userRef;
+};
 
 export default firebase;

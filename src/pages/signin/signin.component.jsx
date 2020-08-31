@@ -3,10 +3,19 @@ import SignInForm from "../../components/signin-form/signin-form.component";
 import RegisterForm from "../../components/register-form/register-form.component";
 import "./signin.styles.scss";
 
+const INIT_STATE = {
+  email: "",
+  password: "",
+  register_email: "",
+  register_password: "",
+  register_confirm_password: "",
+  register_phn: "",
+};
+
 class SignIn extends React.Component {
   constructor() {
     super();
-    this.state = { email: "", password: "" };
+    this.state = INIT_STATE;
   }
 
   /**
@@ -18,12 +27,7 @@ class SignIn extends React.Component {
     // prevent or else page will load
     event.preventDefault();
     this.setState({
-      email: "",
-      password: "",
-      register_email: "",
-      register_password: "",
-      register_confirm_password: "",
-      register_phn: "",
+      ...INIT_STATE,
     });
   };
 

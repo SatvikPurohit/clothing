@@ -4,36 +4,52 @@ import Header from "./components/header/header.component.jsx";
 import HomePage from "./pages/homepage/homepage.component";
 import Products from "./pages/products/products.component.jsx";
 import SignIn from "./pages/signin/signin.component.jsx";
-import { auth } from "./firebase/firebase.utils";
+import { auth, currentUserProfileDocument } from "./firebase/firebase.utils";
 import "./App.styles.scss";
 
 class App extends React.Component {
   unsubscribeAuth = null;
   constructor() {
     super();
-    this.state = { currentUser: {} };
+    this.state = {
+      currentUser: null,
+    };
   }
   componentDidMount() {
     /* 
-     auth.onAuthStateChanged: once after login,
-     then always executes till app logout
+      Check: register event handler onAuthStateChanged
+      auth.onAuthStateChanged: called only once after sign-in(obj) and on sign-out(null)
+      also, for every refresh checks whether session exists or not
+      cb (user) =>  has to be async as we are making api call in it
      */
-    this.unsubscribeAuth = auth.onAuthStateChanged((user) => {
+    this.unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        const { refreshToken, photoURL, email, displayName, ...restObj } = user;
-        this.setState({
-          currentUser: {
+        // add to firebase store ie. sign-up
+        const userRef = await currentUserProfileDocument(user);
+        userRef.onSnapshot((snapshot) => {
+          const {
             refreshToken,
             photoURL,
             email,
             displayName,
-          },
+            uid,
+          } = snapshot.data();
+          this.setState({
+            currentUser: {
+              refreshToken,
+              photoURL,
+              email,
+              displayName,
+              uid,
+            },
+          });
         });
-      }
+      } else this.setState({ currentUser: null });
     });
   }
 
   componentWillUnmount() {
+    // un-register
     this.unsubscribeAuth();
   }
 

@@ -13,12 +13,12 @@ const RegisterForm = ({ onSubmit, onChange, fieldValues }) => {
 
   return (
     <div className="register-form">
-      <h2 className="register-form__title"> Create Account</h2>
+      <h2 className="register-form__title">Create Account</h2>
       <span className="register-form__subtitle">Sign up with your details</span>
 
       <form onSubmit={onSubmit}>
         <FormInput
-          htmlName="email"
+          htmlName="register_email"
           htmlType="email"
           className="register-form__input"
           value={register_email}

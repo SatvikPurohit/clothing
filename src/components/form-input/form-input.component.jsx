@@ -1,8 +1,14 @@
 import React from "react";
 import "./form-input.styles.scss";
 
-const FormInput = ({ htmlType, htmlName, className, label, ...other }) => {
-  const { value } = other;
+const FormInput = ({
+  htmlType,
+  htmlName,
+  className,
+  label,
+  value,
+  ...other
+}) => {
   let classString = "form-group__input";
   let labelClassString = "form-group__label";
   if (className) classString = `${classString} ${className}`;
@@ -14,9 +20,14 @@ const FormInput = ({ htmlType, htmlName, className, label, ...other }) => {
         name={htmlName}
         type={htmlType}
         className={classString}
+        value={value}
         {...other}
       />
-      {label && <label className={labelClassString}>{label}</label>}
+      {label && (
+        <label htmlFor={htmlName} className={labelClassString}>
+          {label}
+        </label>
+      )}
     </div>
   );
 };
